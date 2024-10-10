@@ -1,4 +1,4 @@
-// Задача 1. Дано N-дерево. Удалить самые далекие от корня листья в дереве.
+// Р—Р°РґР°С‡Р° 1. Р”Р°РЅРѕ N-РґРµСЂРµРІРѕ. РЈРґР°Р»РёС‚СЊ СЃР°РјС‹Рµ РґР°Р»РµРєРёРµ РѕС‚ РєРѕСЂРЅСЏ Р»РёСЃС‚СЊСЏ РІ РґРµСЂРµРІРµ.
 
 #include<iostream>
 #include<chrono>
@@ -113,8 +113,8 @@ void assign_parent_pointers(Node* root) {
         return;
     for (Node* child : root->childs) {
         if (child) {
-            child->parent = root; // Устанавливаем указатель на родителя для каждого потомка
-            assign_parent_pointers(child); // Рекурсивно вызываем функцию для каждого потомка
+            child->parent = root; // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј СѓРєР°Р·Р°С‚РµР»СЊ РЅР° СЂРѕРґРёС‚РµР»СЏ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїРѕС‚РѕРјРєР°
+            assign_parent_pointers(child); // Р РµРєСѓСЂСЃРёРІРЅРѕ РІС‹Р·С‹РІР°РµРј С„СѓРЅРєС†РёСЋ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїРѕС‚РѕРјРєР°
         }
     }
 }
@@ -122,7 +122,7 @@ void assign_parent_pointers(Node* root) {
 void generate_file(const std::string& filename, int count) {
     std::ofstream file(filename);
     if (!file.is_open()) {
-        std::cerr << "Невозможно открыть файл " << filename << std::endl;
+        std::cerr << "РќРµРІРѕР·РјРѕР¶РЅРѕ РѕС‚РєСЂС‹С‚СЊ С„Р°Р№Р» " << filename << std::endl;
         return;
     }
     int rand_num = 0;
@@ -137,10 +137,10 @@ int main() {
     srand(time(0));
     setlocale(LC_ALL, "ru");
 
-    std::cout << "\t\t\t\t----------- Информация по программе -----------\n\n"
-        << "Для работы с деревом выберете способ его создания:\n\n"
-        << "1 - произвольное построение по заданному кол-ву узлов\n"
-        << "2 - построение по заданному шаблону с конкретными вершинами\n";
+    std::cout << "\t\t\t\t----------- РРЅС„РѕСЂРјР°С†РёСЏ РїРѕ РїСЂРѕРіСЂР°РјРјРµ -----------\n\n"
+        << "Р”Р»СЏ СЂР°Р±РѕС‚С‹ СЃ РґРµСЂРµРІРѕРј РІС‹Р±РµСЂРµС‚Рµ СЃРїРѕСЃРѕР± РµРіРѕ СЃРѕР·РґР°РЅРёСЏ:\n\n"
+        << "1 - РїСЂРѕРёР·РІРѕР»СЊРЅРѕРµ РїРѕСЃС‚СЂРѕРµРЅРёРµ РїРѕ Р·Р°РґР°РЅРЅРѕРјСѓ РєРѕР»-РІСѓ СѓР·Р»РѕРІ\n"
+        << "2 - РїРѕСЃС‚СЂРѕРµРЅРёРµ РїРѕ Р·Р°РґР°РЅРЅРѕРјСѓ С€Р°Р±Р»РѕРЅСѓ СЃ РєРѕРЅРєСЂРµС‚РЅС‹РјРё РІРµСЂС€РёРЅР°РјРё\n";
 
     int choice = 0;
     std::cin >> choice;
@@ -148,9 +148,9 @@ int main() {
     int counts_of_nodes = 0, arity = 0;
 
     if (choice == 1) {
-        std::cout << "Укажите кол-во создаваемых узлов: ";
+        std::cout << "РЈРєР°Р¶РёС‚Рµ РєРѕР»-РІРѕ СЃРѕР·РґР°РІР°РµРјС‹С… СѓР·Р»РѕРІ: ";
         std::cin >> counts_of_nodes;
-        std::cout << "Укажите арность дерева: ";
+        std::cout << "РЈРєР°Р¶РёС‚Рµ Р°СЂРЅРѕСЃС‚СЊ РґРµСЂРµРІР°: ";
         std::cin >> arity;
 
         Node* root = new Node(rand() % 10, arity);
@@ -163,23 +163,23 @@ int main() {
             add_node(num, root, arity);
         int root_height = tree_height(root);
         set_all_depths(root);
-        std::cout << "Исходное дерево:" << std::endl;
+        std::cout << "РСЃС…РѕРґРЅРѕРµ РґРµСЂРµРІРѕ:" << std::endl;
         print_tree(root);
-        std::cout << "\n\nПосле удаления самых далеких листов:" << std::endl;
+        std::cout << "\n\nРџРѕСЃР»Рµ СѓРґР°Р»РµРЅРёСЏ СЃР°РјС‹С… РґР°Р»РµРєРёС… Р»РёСЃС‚РѕРІ:" << std::endl;
         auto start1 = std::chrono::high_resolution_clock::now();
         delete_distant_leafs(root, root_height);
         auto end1 = std::chrono::high_resolution_clock::now();
         auto duration1 = std::chrono::duration_cast<std::chrono::microseconds>(end1 - start1).count();
         print_tree(root);
         clear_tree(root);
-        std::cout << "\nВремя работы алгоритма: " << duration1 << " мкс.\n";
+        std::cout << "\nР’СЂРµРјСЏ СЂР°Р±РѕС‚С‹ Р°Р»РіРѕСЂРёС‚РјР°: " << duration1 << " РјРєСЃ.\n";
     }
     else if (choice == 2) {
-        std::cout << "Укажите арность дерева: ";
+        std::cout << "РЈРєР°Р¶РёС‚Рµ Р°СЂРЅРѕСЃС‚СЊ РґРµСЂРµРІР°: ";
         std::cin >> arity;
-        std::cout << "Введите каждый узел на новой строке в формате val f1 f2 ... fn, где\n"
-            << "val - значение узла, fi = 1, если потомок\nесть и 0 в противном случае\n\n"
-            << "*создание дерева осуществляется в прямом порядке*"
+        std::cout << "Р’РІРµРґРёС‚Рµ РєР°Р¶РґС‹Р№ СѓР·РµР» РЅР° РЅРѕРІРѕР№ СЃС‚СЂРѕРєРµ РІ С„РѕСЂРјР°С‚Рµ val f1 f2 ... fn, РіРґРµ\n"
+            << "val - Р·РЅР°С‡РµРЅРёРµ СѓР·Р»Р°, fi = 1, РµСЃР»Рё РїРѕС‚РѕРјРѕРє\nРµСЃС‚СЊ Рё 0 РІ РїСЂРѕС‚РёРІРЅРѕРј СЃР»СѓС‡Р°Рµ\n\n"
+            << "*СЃРѕР·РґР°РЅРёРµ РґРµСЂРµРІР° РѕСЃСѓС‰РµСЃС‚РІР»СЏРµС‚СЃСЏ РІ РїСЂСЏРјРѕРј РїРѕСЂСЏРґРєРµ*"
             << std::endl;
 
 
@@ -202,19 +202,19 @@ int main() {
         assign_parent_pointers(root);
         int root_height = tree_height(root);
         set_all_depths(root);
-        std::cout << "Исходное дерево:" << std::endl;
+        std::cout << "РСЃС…РѕРґРЅРѕРµ РґРµСЂРµРІРѕ:" << std::endl;
         print_tree(root);
-        std::cout << "\n\nПосле удаления самых далеких листов:" << std::endl;
+        std::cout << "\n\nРџРѕСЃР»Рµ СѓРґР°Р»РµРЅРёСЏ СЃР°РјС‹С… РґР°Р»РµРєРёС… Р»РёСЃС‚РѕРІ:" << std::endl;
         auto start2 = std::chrono::high_resolution_clock::now();
         delete_distant_leafs(root, root_height);
         auto end2 = std::chrono::high_resolution_clock::now();
         auto duration2 = std::chrono::duration_cast<std::chrono::microseconds>(end2 - start2).count();
         print_tree(root);
         clear_tree(root);
-        std::cout << "\nВремя работы алгоритма: " << duration2 << " мкс.\n";
+        std::cout << "\nР’СЂРµРјСЏ СЂР°Р±РѕС‚С‹ Р°Р»РіРѕСЂРёС‚РјР°: " << duration2 << " РјРєСЃ.\n";
     }
     else {
-        std::cout << "Некорректный ввод, программа завершена";
+        std::cout << "РќРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ РІРІРѕРґ, РїСЂРѕРіСЂР°РјРјР° Р·Р°РІРµСЂС€РµРЅР°";
         return -1;
     }
     return 0;
